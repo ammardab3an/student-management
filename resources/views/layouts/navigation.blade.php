@@ -16,6 +16,22 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('students.index')" :active="request()->routeIs('students.index')">
+                        {{ __('Students') }}
+                    </x-nav-link>
+                </div>
+
+                @if(auth()->user()->is_admin)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+
             </div>
 
             <!-- Settings Dropdown -->
