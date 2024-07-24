@@ -21,5 +21,12 @@ class AdminUserSeeder extends Seeder
             'password' => Hash::make('password'),
             'is_admin' => true,
         ]);
+
+        User::create([
+            'name' => 'Admin Backup',
+            'email' => 'admin.backup@example.com',
+            'password' => Hash::make('password'),
+            'is_admin' => true,
+        ]);
     }
 }
