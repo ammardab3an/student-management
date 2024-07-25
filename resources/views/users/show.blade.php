@@ -24,21 +24,30 @@
                             <p class="text-sm font-medium text-gray-600">{{ __('Admin:') }}</p>
                             <input type="checkbox" disabled {{ $user->is_admin ? 'checked' : '' }} class="rounded border-gray-300 text-blue-600 shadow-sm">
                         </div>
+                        <div class="mt-4">
+                            <p class="text-sm font-medium text-gray-600">{{ __('Created At:') }}</p>
+                            <p class="text-sm text-gray-900">{{ $user->created_at }}</p>
+                        </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm font-medium text-gray-600">{{ __('Updated At:') }}</p>
+                            <p class="text-sm text-gray-900">{{ $user->updated_at }}</p>
+                        </div>
                     </div>
 
                     <!-- Actions -->
                     <div class="mt-6 flex space-x-4">
-                        <a href="{{ route('users.edit', $user) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <a href="{{ route('users.edit', $user) }}" class="mb-4 ml-3 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                             {{ __('Edit User') }}
                         </a>
                         <form action="{{ route('users.destroy', $user) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            <button type="submit" class="mb-4 ml-3 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                 {{ __('Delete User') }}
                             </button>
                         </form>
-                        <a href="{{ route('users.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                        <a href="{{ route('users.index') }}" class="mb-4 ml-3 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                             {{ __('Back to List') }}
                         </a>
                     </div>
