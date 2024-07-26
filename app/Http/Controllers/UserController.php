@@ -32,15 +32,16 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users',
+            'email' => 'required|string|lowercase|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'is_admin' => 'boolean',
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'is_admin' => $request->has('is_admin'),
+            'is_admin' => $request->get('is_admin', false),
         ]);
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
@@ -68,14 +69,15 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email',
+            'name' => 'string|max:255',
+            'email' => 'string|lowercase|email|max:255',
+            'is_admin' => 'boolean',
         ]);
 
         $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'is_admin' => $request->has('is_admin'),
+            'name' => $request->get('name', $user->name),
+            'email' => $request->get('email', $user->email),
+            'is_admin' => $request->get('is_admin', $user->is_admin),
         ]);
 
         return redirect()->route('users.index')->with('success', 'User updated successfully.');

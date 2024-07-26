@@ -32,6 +32,7 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        // non admins can not update their profile to make themselves admins
         if($request->user()->isDirty('is_admin')){
             if($request->user()->is_admin){
                 $request->user()->is_admin = false;

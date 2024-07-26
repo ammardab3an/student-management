@@ -12,7 +12,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::orderBy('id')->get()->reverse();
         return view('students.index', compact('students'));
     }
 
@@ -30,9 +30,9 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             'age' => 'required|integer|min:10|max:99',
-            'residence' => 'required',
+            'residence' => 'required|string',
         ]);
 
         Student::create([
@@ -66,15 +66,15 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'name' => 'required',
-            'age' => 'required|integer|min:10|max:99',
-            'residence' => 'required',
+            'name' => 'string|max:255',
+            'age' => 'integer|min:10|max:99',
+            'residence' => 'string',
         ]);
 
         $student->update([
-            'name' => $request->name,
-            'age' => $request->age,
-            'residence' => $request->residence,
+            'name' => $request->get('name', $student->name),
+            'age' => $request->get('age', $student->age),
+            'residence' => $request->get('residence', $student->residence),
         ]);
 
         return redirect()->route('students.index')->with('success', 'Student updated successfully.');
