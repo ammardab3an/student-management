@@ -31,6 +31,10 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+                                    {{ __('Id') }}
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                                     {{ __('Name') }}
                                 </th>
                                 <th scope="col"
@@ -63,6 +67,9 @@
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200">
                             @foreach ($students as $student)
                                 <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                                        {{ $student->id }}
+                                    </td>
                                     <td
                                         class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700 dark:text-gray-300">
                                         <a href="{{ route('students.show', $student->id) }}"
@@ -72,6 +79,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
                                         {{ $student->age }}
+                                    </td>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
                                         {{ $student->residence }}
@@ -91,7 +99,7 @@
                                                 {{ __('Edit') }}
                                             </a>
                                             <form action="{{ route('students.destroy', $student->id) }}" method="POST"
-                                                class="inline-block ml-4">
+                                                class="inline-block ml-4" onsubmit="return confirm('Are you sure you want to delete this entry?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 hover:text-red-900">

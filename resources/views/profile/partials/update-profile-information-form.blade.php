@@ -24,15 +24,6 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        {{-- @if(auth()->user()->is_admin) --}}
-            <div>
-                <x-input-label for="is_admin" :value="__('Is Admin')" />
-                <x-text-input id="is_admin" name="is_admin" type="text" class="mt-1 block w-full" :value="old('is_admin', $user->is_admin)"
-                    required autocomplete="is_admin" />
-                <x-input-error class="mt-2" :messages="$errors->get('is_admin')" />
-            </div>
-        {{-- @endif --}}
-
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)"

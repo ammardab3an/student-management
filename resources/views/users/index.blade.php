@@ -88,7 +88,7 @@
                                             {{ __('Edit') }}
                                         </a>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                            class="inline-block ml-4">
+                                            class="inline-block ml-4" onsubmit="return confirm('Are you sure you want to delete this entry?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900">
