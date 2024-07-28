@@ -16,16 +16,8 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
-
-        foreach (range(1, 10) as $index) {
-            DB::table('students')->insert([
-                'name' => $faker->name,
-                'age' => $faker->numberBetween(18, 30),
-                'residence' => $faker->streetAddress(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+        if(Student::count() === 0){
+            Student::factory(10)->create();
         }
     }
 }
